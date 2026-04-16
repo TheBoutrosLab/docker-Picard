@@ -17,8 +17,15 @@ FROM ubuntu:24.04
 ARG PICARD_ENV
 COPY --from=builder ${PICARD_ENV} ${PICARD_ENV}
 ENV PATH="${PICARD_ENV}/bin:${PATH}"
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
+
+# Picard's launcher exports LC_ALL=en_US.UTF-8, so generate that locale explicitly
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends locales && \
+    locale-gen en_US.UTF-8 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 # Add a new user/group called bldocker
 RUN groupadd -g 500001 bldocker && \
