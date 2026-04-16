@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Changed
+- Update Ubuntu base image from 20.04 to 24.04
+- Switch the builder image from Mambaforge to Miniforge3 and update it from 23.3.1-1 to 26.1.1-2
+- Install Picard into an isolated Conda environment in the runtime image
+- Configure the runtime locale for the packaged Picard launcher
+- Update maintainer metadata and image source labels
+
 ## [3.4.0] - 2025-04-14
 ### Added
  - Update Picard 3.4.0

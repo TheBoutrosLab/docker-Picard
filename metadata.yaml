@@ -1,7 +1,7 @@
 ---
 Category: 'docker'
 Description: 'Docker repository for Picard'
-Maintainers: ['selinawu@mednet.ucla.edu']
+Maintainers: ['rhughwhite@sbpdiscovery.org']
 Contributors: ['Aaron Holmes', 'Helena Winata', 'Jieun Oh', 'Takafumi Yamaguchi', 'Arpi Beshlikyan', 'Selina Wu', 'Beth Neilsen', 'Joseph Salmingo']
 Languages: ['Dockerfile']
 Tools: ['Picard']
