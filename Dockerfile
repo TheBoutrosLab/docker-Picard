@@ -1,16 +1,24 @@
-ARG MINIFORGE_VER=23.3.1-1
-FROM condaforge/mambaforge:${MINIFORGE_VER} AS builder
+ARG MINIFORGE_VERSION=26.1.1-2
+ARG PICARD_ENV=/opt/conda/envs/picard
 
-# Use mamba to install tools and dependencies into /usr/local
+FROM condaforge/miniforge3:${MINIFORGE_VERSION} AS builder
+
+# Install Picard into an isolated Conda environment instead of mutating base
 ARG PICARD_VERSION=3.4.0
-RUN mamba create -qy -p /usr/local \
+ARG PICARD_ENV
+RUN mamba create -qy -p ${PICARD_ENV} \
     -c bioconda \
     -c conda-forge \
-    picard-slim==${PICARD_VERSION}
+    picard-slim==${PICARD_VERSION} && \
+    mamba clean -afy
 
 # Deploy the target tools into a base image
-FROM ubuntu:20.04
-COPY --from=builder /usr/local /usr/local
+FROM ubuntu:24.04
+ARG PICARD_ENV
+COPY --from=builder ${PICARD_ENV} ${PICARD_ENV}
+ENV PATH="${PICARD_ENV}/bin:${PATH}"
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 # Add a new user/group called bldocker
 RUN groupadd -g 500001 bldocker && \
@@ -19,5 +27,5 @@ RUN groupadd -g 500001 bldocker && \
 # Change the default user to bldocker from root
 USER bldocker
 
-LABEL maintainer="Joseph Salmingo <jsalmingo@mednet.ucla.edu>" \
-      org.opencontainers.image.source=https://github.com/uclahs-cds/docker-Picard
+LABEL maintainer="Rupert Hugh-White <rhughwhite@sbpdiscovery.org>" \
+      org.opencontainers.image.source=https://github.com/TheBoutrosLab/docker-Picard

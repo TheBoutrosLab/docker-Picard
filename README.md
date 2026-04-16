@@ -4,13 +4,13 @@ TheBoutrosLab Dockerfile for Picard (picard-slim) from the Broad Institute. A se
 # Documentation
 
 Picard can be found on GitHub at [broadinstitute/picard](https://github.com/broadinstitute/picard).
-`picard.jar` can be found at `/usr/local/share/picard-slim-3.3.0-0/picard.jar`
+`picard.jar` can be found at `/opt/conda/envs/picard/share/picard-slim-3.4.0-0/picard.jar`
 
 # Version
 | Tool | Version |
 |------|---------|
 | picard-slim | 3.4.0 |
-| Java | 1.17 |
+| Java | 25.0.2 |
 
 ## References
 
