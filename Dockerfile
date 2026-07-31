@@ -4,7 +4,7 @@ ARG PICARD_ENV=/opt/conda/envs/picard
 FROM condaforge/miniforge3:${MINIFORGE_VERSION} AS builder
 
 # Install Picard into an isolated Conda environment instead of mutating base
-ARG PICARD_VERSION=3.4.0
+ARG PICARD_VERSION=3.5.0
 ARG PICARD_ENV
 RUN mamba create -qy -p ${PICARD_ENV} \
     -c bioconda \
